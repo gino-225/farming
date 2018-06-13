@@ -10,13 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613162431) do
+ActiveRecord::Schema.define(version: 20180613222423) do
 
   create_table "crops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "fields", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "title"
+    t.text "size"
+    t.integer "number"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "grows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "field_id"
+    t.integer "crop_id"
+    t.index ["crop_id"], name: "index_grows_on_crop_id"
+    t.index ["field_id"], name: "index_grows_on_field_id"
+  end
+
+  create_table "plantings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "date"
+    t.boolean "seed_treated"
+    t.text "soil_condition"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "grow_id"
+    t.index ["grow_id"], name: "index_plantings_on_grow_id"
   end
 
 end

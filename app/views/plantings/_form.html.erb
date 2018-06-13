@@ -1,0 +1,40 @@
+<%= form_with(model: planting, local: true) do |form| %>
+  <% if planting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(planting.errors.count, "error") %> prohibited this planting from being saved:</h2>
+
+      <ul>
+      <% planting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :grow_id %>
+    <%= form.select :grow_id,
+      options_for_select(Grow.all.map { |grow| [grow.crop.title, grow.id] }),
+      { prompt: true }
+    %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date, id: :planting_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seed_treated %>
+    <%= form.check_box :seed_treated, id: :planting_seed_treated %>
+  </div>
+
+  <div class="field">
+    <%= form.label :soil_condition %>
+    <%= form.text_area :soil_condition, id: :planting_soil_condition %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

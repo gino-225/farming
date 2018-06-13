@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Grows</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Crop</th>
+      <th>field</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @grows.each do |grow| %>
+      <tr>
+        <td><%= grow.title %></td>
+        <td><%= grow.description %></td>
+        <td><%= grow.crop.title %></td>
+        <td><%= grow.field.title %></td>
+        <td><%= link_to 'Show', grow %></td>
+        <td><%= link_to 'Edit', edit_grow_path(grow) %></td>
+        <td><%= link_to 'Destroy', grow, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Grow', new_grow_path %>
+
+
+<h1>Clicking a Grow then display everthing to do with that grow on the show page</h1>
