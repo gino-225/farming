@@ -1,0 +1,43 @@
+<%= form_with(model: grow, local: true) do |form| %>
+  <% if grow.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(grow.errors.count, "error") %> prohibited this grow from being saved:</h2>
+
+      <ul>
+      <% grow.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :grow_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :grow_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :crop_id %>
+    <%= form.select :crop_id,
+      options_for_select(Crop.all.map { |crop| [crop.title, crop.id] }),
+      { prompt: true }
+    %>
+  </div>
+
+  <div class="field">
+    <%= form.label :field_id %>
+    <%= form.select :field_id,
+      options_for_select(Field.all.map { |field| [field.title, field.id] }),
+      { prompt: true }
+    %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

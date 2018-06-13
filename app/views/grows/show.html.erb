@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @grow.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @grow.description %>
+</p>
+
+<p>
+  <strong>Crop type:</strong>
+  <%= @grow.crop.title %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @grow.field.title %>
+</p>
+<%= link_to 'Edit', edit_grow_path(@grow) %> |
+<%= link_to 'Back', grows_path %>
+
+<h1>show all stuuf under here</h1>
+
+<p>
+  <strong>ID:</strong>
+  <%= @grow.id %>
+
+</p>
+
+<% plantings = @grow.select_table(@grow.id) %>
+
+   <% plantings.each do |plant| %>
+       <%= plant.date %><br>
+       <%= plant.seed_treated%><br>
+       <%= plant.soil_condition%><br>
+   <% end %>

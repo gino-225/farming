@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @planting.date %>
+</p>
+
+<p>
+  <strong>Seed treated:</strong>
+  <%= @planting.seed_treated %>
+</p>
+
+<p>
+  <strong>Soil condition:</strong>
+  <%= @planting.soil_condition %>
+</p>
+
+<p>
+  <strong>Grow:</strong>
+  <%= @planting.grow.crop.title %>
+</p>
+
+<p>
+  <strong>field:</strong>
+  <%= @planting.grow.field.title %>
+</p>
+
+<%= link_to 'Edit', edit_planting_path(@planting) %> |
+<%= link_to 'Back', plantings_path %>
