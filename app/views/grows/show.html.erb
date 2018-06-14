@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @grow.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @grow.description %>
+  <strong>Start Date:</strong>
+  <%= @grow.startdate %>
 </p>
 
 <p>
@@ -16,9 +11,23 @@
 </p>
 
 <p>
-  <strong>Field:</strong>
+  <strong>Field Name:</strong>
   <%= @grow.field.title %>
 </p>
+
+<p>
+  <strong>Field Number:</strong>
+  <%= @grow.field.number %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @grow.description %>
+</p>
+
+
+
+
 <%= link_to 'Edit', edit_grow_path(@grow) %> |
 <%= link_to 'Back', grows_path %>
 
@@ -30,10 +39,60 @@
 
 </p>
 
-<% plantings = @grow.select_table(@grow.id) %>
+<%# create an array of all the jobs then run through then in another
+loop bellow and pass the job type through to the method in the model
+which will have a case statment or maybe just kepp them seperated
+YES every table has different values so each one has to be writern manually. %>
 
-   <% plantings.each do |plant| %>
-       <%= plant.date %><br>
-       <%= plant.seed_treated%><br>
-       <%= plant.soil_condition%><br>
-   <% end %>
+
+
+ <h1>Planting</h1>
+ these are all the plantings accossiated with this grow<br>
+    <% @grow.select_table("planting", @grow.id).each do |plant| %>
+        <%= "#{plant.date} , #{plant.seed_treated}, #{plant.soil_condition}, "  %>
+        <% if plant.seed_treated? %>
+           yes treated SEED
+        <% else %>
+           SEED not treated
+        <% end %>
+        <%= link_to 'Edit', planting_path(plant) %>
+        <br>
+  <% end %>
+
+
+
+  <h1>Harvesting</h1>
+
+
+
+         <table>
+           <thead>
+             <tr>
+               <th>Crop</th>
+               <th>Date</th>
+               <th>Quantity</th>
+               <th>Field finished</th>
+               <th colspan="3"></th>
+             </tr>
+           </thead>
+
+           <tbody>
+          <% @grow.select_table("harvesting", @grow.id).each do |harvesting| %>
+               <tr>
+                 <td><%= harvesting.grow.crop.title %></td>
+                 <td><%= harvesting.date %></td>
+                 <td><%= harvesting.quantity %></td>
+
+                 <% if harvesting.field_finished? %>
+                     <td>Yes Completed</td>
+                 <%else%>
+                     <td>Not field_finished</td>
+                 <% end %>
+
+                 <td><%= link_to 'Show', harvesting %></td>
+                 <td><%= link_to 'Edit', edit_harvesting_path(harvesting) %></td>
+                 <td><%= link_to 'Destroy', harvesting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+               </tr>
+             <% end %>
+           </tbody>
+         </table>

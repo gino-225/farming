@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :measurements
+  resources :harvestings
   resources :plantings
   resources :grows
   resources :fields

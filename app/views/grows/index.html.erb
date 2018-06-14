@@ -5,10 +5,12 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
+      <th>Start Date</th>
       <th>Crop</th>
-      <th>field</th>
+      <th>Field Name</th>
+      <th>Field Number</th>
+      <th>Description</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +18,11 @@
   <tbody>
     <% @grows.each do |grow| %>
       <tr>
-        <td><%= grow.title %></td>
-        <td><%= grow.description %></td>
+        <td><%= grow.startdate %></td>
         <td><%= grow.crop.title %></td>
         <td><%= grow.field.title %></td>
+        <td><%= grow.field.number %></td>
+        <td><%= grow.description %></td>
         <td><%= link_to 'Show', grow %></td>
         <td><%= link_to 'Edit', edit_grow_path(grow) %></td>
         <td><%= link_to 'Destroy', grow, method: :delete, data: { confirm: 'Are you sure?' } %></td>
