@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180614134357) do
+ActiveRecord::Schema.define(version: 20180616104452) do
 
   create_table "crops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20180614134357) do
     t.integer "field_id"
     t.integer "crop_id"
     t.date "startdate"
+    t.boolean "finished"
     t.index ["crop_id"], name: "index_grows_on_crop_id"
     t.index ["field_id"], name: "index_grows_on_field_id"
   end

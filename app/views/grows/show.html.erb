@@ -25,7 +25,14 @@
   <%= @grow.description %>
 </p>
 
-
+<p>
+  <strong>Status:</strong>
+  <% if @grow.finished? %>
+    Finished
+  <% else %>
+    On Going
+  <% end %>
+</p>
 
 
 <%= link_to 'Edit', edit_grow_path(@grow) %> |
@@ -49,6 +56,7 @@ YES every table has different values so each one has to be writern manually. %>
  <h1>Planting</h1>
 
  All Planting accossiated with this Grow<br>
+ <%= link_to 'Create New Planting', new_planting_path %>
 
   <table>
     <thead>
