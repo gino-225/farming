@@ -4,7 +4,7 @@ class GrowsController < ApplicationController
   # GET /grows
   # GET /grows.json
   def index
-    @grows = Grow.all
+    @grows = Grow.all.sort_by(&:startdate)
   end
 
   # GET /grows/1

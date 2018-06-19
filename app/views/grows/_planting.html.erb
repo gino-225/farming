@@ -1,0 +1,32 @@
+<h1>Planting</h1>
+
+All Planting accossiated with this Grow<br>
+<%= link_to 'Create New Planting', new_planting_path %>
+
+ <table>
+   <thead>
+     <tr>
+       <th>Date Planted</th>
+       <th>Treated Seed</th>
+       <th colspan="3"></th>
+     </tr>
+   </thead>
+
+   <tbody>
+  <% @grow.select_table("planting", @grow.id).each do |plant| %>
+       <tr>
+         <td><%= plant.date %></td>
+
+         <% if plant.seed_treated? %>
+             <td>Yes treated SEED</td>
+         <%else%>
+             <td>SEED not treated</td>
+         <% end %>
+
+         <td><%= link_to 'Show', plant %></td>
+         <td><%= link_to 'Edit', edit_planting_path(plant) %></td>
+         <td><%= link_to 'Destroy', plant, method: :delete, data: { confirm: 'Are you sure?' }%></td>
+       </tr>
+     <% end %>
+   </tbody>
+ </table>
