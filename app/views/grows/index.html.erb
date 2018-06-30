@@ -21,6 +21,7 @@
       <th>Crop</th>
       <th>Field Name</th>
       <th>Field Number</th>
+      <th>Field Size</th>
       <th>Description</th>
 
       <th colspan="3"></th>
@@ -28,6 +29,7 @@
   </thead>
 
   <tbody>
+    <% total_vergies = Array.new%>
     <% @grows.each do |grow| %>
       <tr>
         <td><%= grow.title %></td>
@@ -40,6 +42,8 @@
         <td><%= grow.crop.title %></td>
         <td><%= grow.field.title %></td>
         <td><%= grow.field.number %></td>
+        <td><%= grow.field.size %></td>
+        <% total_vergies.push(grow.field.size)%>
         <td><%= grow.description.truncate(27) %></td>
         <td><%= link_to 'Show', grow %></td>
         <td><%= link_to 'Edit', edit_grow_path(grow) %></td>
@@ -50,6 +54,7 @@
 </table>
 
 <br>
+<p>Total Vergies = <%= total_vergies.inject(0){|sum,x| sum + x }%> </p>
 
 <%= link_to 'New Grow', new_grow_path %>
 

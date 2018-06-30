@@ -13,6 +13,13 @@ class Grow < ApplicationRecord
   # end
 
   def self.search(search)
+    #where("title ILIKE :search OR description ILIKE :search", search: "%#{search}%")
+    #SELECT `categories`.* FROM `categories` WHERE (title LIKE '%sff%')
+    #where("title LIKE ?", "%#{search}%")
+    #where("title LIKE", "%#{search}%" "OR description LIKE", "%#{search}%")
+
+    #where("name ILIKE ? OR address ILIKE ?", "%#{params[:q]}%", "%#{params[:q]}%").all.order('LOWER(name)')
+    #where("title ILIKE ? OR description ILIKE ?", "%#{search}%", "%#{search}%").all
     where("title LIKE ?", "%#{search}%")
   end
 
