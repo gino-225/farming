@@ -14,7 +14,7 @@
   <div class="field">
     <%= form.label :grow_id %>
     <%= form.select :grow_id,
-      options_for_select(Grow.all.map { |grow| [grow.crop.title, grow.id] }),
+      options_for_select(Grow.all.map { |grow| [grow.title, grow.id] }),
       { prompt: true }
     %>
   </div>

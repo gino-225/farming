@@ -1,10 +1,21 @@
 <p id="notice"><%= notice %></p>
+<h1>Search</h1>
+
+<div class="searchField">
+
+    <%= form_tag(grows_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Categories" %>
+      <%= submit_tag "Search", :name => nil %>
+    <% end %>
+
+</div>
 
 <h1>Grows</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
+      <th>Title</th>
       <th>Status</th>
       <th>Start Date</th>
       <th>Crop</th>
@@ -19,6 +30,7 @@
   <tbody>
     <% @grows.each do |grow| %>
       <tr>
+        <td><%= grow.title %></td>
         <% if grow.finished? %>
           <td>Finished</td>
         <% else %>
@@ -28,7 +40,7 @@
         <td><%= grow.crop.title %></td>
         <td><%= grow.field.title %></td>
         <td><%= grow.field.number %></td>
-        <td><%= grow.description %></td>
+        <td><%= grow.description.truncate(27) %></td>
         <td><%= link_to 'Show', grow %></td>
         <td><%= link_to 'Edit', edit_grow_path(grow) %></td>
         <td><%= link_to 'Destroy', grow, method: :delete, data: { confirm: 'Are you sure?' } %></td>

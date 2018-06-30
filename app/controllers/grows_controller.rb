@@ -4,7 +4,14 @@ class GrowsController < ApplicationController
   # GET /grows
   # GET /grows.json
   def index
-    @grows = Grow.all.sort_by(&:startdate)
+    # @grows = Grow.all.sort_by(&:startdate)
+    #@grows = Grow.all.order("finished ASC")
+    if params[:search]
+      @grows = Grow.search(params[:search])
+    else
+      @grows = Grow.all.order("finished ASC")
+    end
+
   end
 
   # GET /grows/1
