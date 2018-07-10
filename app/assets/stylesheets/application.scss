@@ -1,11 +1,12 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-// @import "bootstrap";
-@import "mainmenu/bootstrap.min.css";
-@import "mainmenu/crops.scss";
+@import "bootstrap";
+// @import "mainmenu/bootstrap.min.css";
+// @import "mainmenu/crops.scss";
 // @import "mainmenu/font-awesome.min";
-@import "mainmenu/metisMenu.min.css";
-
-@import "mainmenu/sb-admin-2.css";
+// @import "mainmenu/metisMenu.min.css";
+@import "admin_template/sb-admin.scss";
+// @import "admin_template/font-awesome/scss/";
+// @import "sb-admin.scss";
 
 
 // body {
