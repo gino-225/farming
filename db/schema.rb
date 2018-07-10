@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613222423) do
+ActiveRecord::Schema.define(version: 20180630150415) do
 
   create_table "crops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20180613222423) do
 
   create_table "fields", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
-    t.text "size"
+    t.integer "size"
     t.integer "number"
     t.text "description"
     t.datetime "created_at", null: false
@@ -35,8 +35,29 @@ ActiveRecord::Schema.define(version: 20180613222423) do
     t.datetime "updated_at", null: false
     t.integer "field_id"
     t.integer "crop_id"
+    t.date "startdate"
+    t.boolean "finished"
     t.index ["crop_id"], name: "index_grows_on_crop_id"
     t.index ["field_id"], name: "index_grows_on_field_id"
+  end
+
+  create_table "harvestings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "date"
+    t.integer "quantity"
+    t.boolean "field_finished"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "measurement_id"
+    t.integer "grow_id"
+    t.index ["grow_id"], name: "index_harvestings_on_grow_id"
+    t.index ["measurement_id"], name: "index_harvestings_on_measurement_id"
+  end
+
+  create_table "measurements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "measure_type"
+    t.integer "weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "plantings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

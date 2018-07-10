@@ -1,25 +1,50 @@
 <p id="notice"><%= notice %></p>
+<h1>Search</h1>
+
+<div class="searchField">
+
+    <%= form_tag(grows_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Categories" %>
+      <%= submit_tag "Search", :name => nil %>
+    <% end %>
+
+</div>
 
 <h1>Grows</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
-      <th>Description</th>
+      <th>Status</th>
+      <th>Start Date</th>
       <th>Crop</th>
-      <th>field</th>
+      <th>Field Name</th>
+      <th>Field Number</th>
+      <th>Field Size</th>
+      <th>Description</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
+    <% total_vergies = Array.new%>
     <% @grows.each do |grow| %>
       <tr>
         <td><%= grow.title %></td>
-        <td><%= grow.description %></td>
+        <% if grow.finished? %>
+          <td>Finished</td>
+        <% else %>
+          <td>On Going</td>
+        <% end %>
+        <td><%= grow.startdate %></td>
         <td><%= grow.crop.title %></td>
         <td><%= grow.field.title %></td>
+        <td><%= grow.field.number %></td>
+        <td><%= grow.field.size %></td>
+        <% total_vergies.push(grow.field.size)%>
+        <td><%= grow.description.truncate(27) %></td>
         <td><%= link_to 'Show', grow %></td>
         <td><%= link_to 'Edit', edit_grow_path(grow) %></td>
         <td><%= link_to 'Destroy', grow, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -29,6 +54,7 @@
 </table>
 
 <br>
+<p>Total Vergies = <%= total_vergies.inject(0){|sum,x| sum + x }%> </p>
 
 <%= link_to 'New Grow', new_grow_path %>
 

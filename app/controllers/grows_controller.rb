@@ -4,7 +4,14 @@ class GrowsController < ApplicationController
   # GET /grows
   # GET /grows.json
   def index
-    @grows = Grow.all
+    # @grows = Grow.all.sort_by(&:startdate)
+    #@grows = Grow.all.order("finished ASC")
+    if params[:search]
+      @grows = Grow.search(params[:search])
+    else
+      @grows = Grow.all.order("finished ASC")
+    end
+
   end
 
   # GET /grows/1
@@ -72,6 +79,6 @@ class GrowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def grow_params
-      params.require(:grow).permit(:title, :description, :crop_id, :field_id)
+      params.require(:grow).permit(:title, :description, :crop_id, :field_id, :startdate, :finished)
     end
 end

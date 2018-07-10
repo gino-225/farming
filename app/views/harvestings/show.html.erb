@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Date:</strong>
+  <%= @harvesting.grow.crop.title %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @harvesting.date %>
+</p>
+
+<p>
+  <strong>Measurement Type:</strong>
+  <%= @harvesting.measurement.measure_type %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @harvesting.quantity %>
+</p>
+
+<p>
+  <strong>Field finished:</strong>
+  <%= @harvesting.field_finished %>
+  <% if @harvesting.field_finished? %>
+      Yes Completed
+  <%else%>
+      Not field_finished
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_harvesting_path(@harvesting) %> |
+<%= link_to 'Back', harvestings_path %>

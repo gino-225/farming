@@ -16,6 +16,12 @@
     <%= form.text_field :title, id: :grow_title %>
   </div>
 
+
+  <div class="field">
+    <%= form.label :startdate %>
+    <%= form.date_select :startdate, id: :grow_startdate %>
+  </div>
+
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description, id: :grow_description %>
@@ -35,6 +41,11 @@
       options_for_select(Field.all.map { |field| [field.title, field.id] }),
       { prompt: true }
     %>
+  </div>
+
+  <div class="field">
+    <%= form.label :finished %>
+    <%= form.check_box :finished, id: :grow_finished %>
   </div>
 
   <div class="actions">

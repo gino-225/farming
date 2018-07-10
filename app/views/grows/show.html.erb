@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>Grow Name</strong>
   <%= @grow.title %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @grow.description %>
+  <strong>Start Date:</strong>
+  <%= @grow.startdate %>
 </p>
 
 <p>
@@ -16,13 +16,34 @@
 </p>
 
 <p>
-  <strong>Field:</strong>
+  <strong>Field Name:</strong>
   <%= @grow.field.title %>
 </p>
+
+<p>
+  <strong>Field Number:</strong>
+  <%= @grow.field.number %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @grow.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <% if @grow.finished? %>
+    Finished
+  <% else %>
+    On Going
+  <% end %>
+</p>
+
+
 <%= link_to 'Edit', edit_grow_path(@grow) %> |
 <%= link_to 'Back', grows_path %>
 
-<h1>show all stuuf under here</h1>
+
 
 <p>
   <strong>ID:</strong>
@@ -30,10 +51,20 @@
 
 </p>
 
-<% plantings = @grow.select_table(@grow.id) %>
+<%# create an array of all the jobs then run through then in another
+loop bellow and pass the job type through to the method in the model
+which will have a case statment or maybe just kepp them seperated
+YES every table has different values so each one has to be writern manually. %>
 
-   <% plantings.each do |plant| %>
-       <%= plant.date %><br>
-       <%= plant.seed_treated%><br>
-       <%= plant.soil_condition%><br>
-   <% end %>
+
+  <% if @grow.select_table("planting", @grow.id).presence %>
+      <%= render 'planting', grow: @grow %>
+  <% else %>
+      <p>No Planting associated to this Grow</p>
+  <% end %>
+
+  <% if @grow.select_table("harvesting", @grow.id).presence %>
+      <%= render 'harvesting', grow: @grow %>
+  <% else %>
+        <p>No Harvests associated to this Grow</p>
+  <% end %>

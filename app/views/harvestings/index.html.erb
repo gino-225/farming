@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Harvestings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Crop</th>
+      <th>Date</th>
+      <th>Quantity</th>
+      <th>Field finished</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @harvestings.each do |harvesting| %>
+      <tr>
+        <td><%= harvesting.grow.crop.title %></td>
+        <td><%= harvesting.date %></td>
+        <td><%= harvesting.quantity %></td>
+
+        <% if harvesting.field_finished? %>
+            <td>Yes Completed</td>
+        <%else%>
+            <td>Not field_finished</td>
+        <% end %>
+
+        <td><%= link_to 'Show', harvesting %></td>
+        <td><%= link_to 'Edit', edit_harvesting_path(harvesting) %></td>
+        <td><%= link_to 'Destroy', harvesting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Harvesting', new_harvesting_path %>

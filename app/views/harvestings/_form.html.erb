@@ -1,0 +1,48 @@
+<%= form_with(model: harvesting, local: true) do |form| %>
+  <% if harvesting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(harvesting.errors.count, "error") %> prohibited this harvesting from being saved:</h2>
+
+      <ul>
+      <% harvesting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :grow_id %>
+    <%= form.select :grow_id,
+      options_for_select(Grow.all.map { |grow| [grow.title, grow.id] }),
+      { prompt: true }
+    %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date, id: :harvesting_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :measurement_id %>
+    <%= form.select :measurement_id,
+      options_for_select(Measurement.all.map { |measure| [measure.measure_type, measure.id] }),
+      { prompt: true }
+    %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, id: :harvesting_quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :field_finished %>
+    <%= form.check_box :field_finished, id: :harvesting_field_finished %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

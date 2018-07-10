@@ -11,30 +11,30 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :grow_id %>
     <%= form.select :grow_id,
-      options_for_select(Grow.all.map { |grow| [grow.crop.title, grow.id] }),
+      options_for_select(Grow.all.map { |grow| [grow.title, grow.id] }),
       { prompt: true }
     %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :date %>
     <%= form.date_select :date, id: :planting_date %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :seed_treated %>
     <%= form.check_box :seed_treated, id: :planting_seed_treated %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :soil_condition %>
     <%= form.text_area :soil_condition, id: :planting_soil_condition %>
   </div>
 
-  <div class="actions">
+  <div class="form-group">
     <%= form.submit %>
   </div>
 <% end %>
